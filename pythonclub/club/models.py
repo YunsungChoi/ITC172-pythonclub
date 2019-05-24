@@ -17,11 +17,11 @@ class Meeting(models.Model):
         verbose_name_plural='Meetings'
 
 class MeetingMinute(models.Model):
-    meetingID=models.ForeignKey(Meeting, on_delete=models.DO_NOTHING)
     meetingAttendance=models.ManyToManyField(User)
+    meetingID=models.ForeignKey(Meeting, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return meetingTitle
+        return self.meetingAttendance
 
     class Meta:
         db_table='MeetingMinute'
