@@ -3,6 +3,7 @@ from .models import Resource
 from .models import Meeting
 from .forms import MeetingForm
 from .forms import ResourceForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request): 
@@ -23,6 +24,7 @@ def meetingdetails(request, id):
     }
     return render(request, 'club/meetingdetails.html', context=context)
 
+@login_required
 def newMeeting(request):
     form=MeetingForm
     if request.method=='POST':
@@ -35,6 +37,7 @@ def newMeeting(request):
           form=MeetingForm()
     return render(request, 'club/newmeeting.html', {'form': form})
 
+@login_required
 def newResource(request):
      form=ResourceForm
      if request.method=='POST':
@@ -46,3 +49,10 @@ def newResource(request):
      else:
           form=ResourceForm()
      return render(request, 'club/newresource.html', {'form': form})
+
+def loginmessage(request):
+    return render(request, 'club/loginmessage.html')
+
+def logoutmessage(request):
+    return render(request, 'club/logoutmessage.html')
+
